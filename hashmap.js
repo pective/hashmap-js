@@ -2,6 +2,7 @@ export default class HashMap {
 	constructor() {
 		this.load_factor = 0.75;
 		this.capacity = 16;
+		this.length = 0;
 		this.buckets = [];
 
 		for (let i = 0; i < this.capacity; i++) {
@@ -24,7 +25,10 @@ export default class HashMap {
 		let key_hash = this.#hash(key);
 		let bucket = this.buckets[key_hash];
 
+		if (this.length / this.capacity > this.load_factor) this.#increaseCapacity();
+
 		bucket.push({ key, value });
+		this.length++;
 
 		console.log(
 			`{ ${key} : ${value} } was added to the hashmap at index ${key_hash}`
@@ -45,5 +49,20 @@ export default class HashMap {
 		console.log(`No value found for key ${key}`);
 	}
 
-	
+	#increaseCapacity() {
+		const oldBuckets = this.buckets;
+		this.capacity *= 2;
+		this.buckets = [];
+
+		for (let i = 0; i < this.capacity; i++) {
+			this.buckets[i] = [];
+		}
+
+		for (const bucket of oldBuckets) {
+			for (const entry of bucket) {
+				const newHash = this.#hash(entry.key);
+				this.buckets[newHash].push(entry);
+			}
+		}
+	}
 }
