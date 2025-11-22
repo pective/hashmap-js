@@ -1,17 +1,18 @@
-class HashMap {
-	constructor(capacity) {
-		this.load_factor = 0.75;
-		this.capacity = capacity;
-	}
+import HashMap from "./hashmap.js";
 
-	hash(key) {
-		let hashCode = 0;
+const testMap = new HashMap();
 
-		const primeNumber = 31;
-		for (let i = 0; i < key.length; i++) {
-			hashCode = primeNumber * hashCode + key.charCodeAt(i);
-		}
+testMap.set("apple", "red");
+testMap.set("banana", "yellow");
+testMap.set("carrot", "orange");
+testMap.set("dog", "brown");
+testMap.set("elephant", "gray");
+testMap.set("frog", "green");
+testMap.set("grape", "purple");
+testMap.set("hat", "black");
+testMap.set("ice cream", "white");
+testMap.set("jacket", "blue");
+testMap.set("kite", "pink");
+testMap.set("lion", "golden");
 
-		return hashCode;
-	}
-}
+testMap.get("kite");
