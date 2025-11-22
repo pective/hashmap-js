@@ -9,7 +9,7 @@ export default class HashMap {
 		}
 	}
 
-	hash(key) {
+	#hash(key) {
 		let hashCode = 0;
 
 		const primeNumber = 31;
@@ -21,7 +21,7 @@ export default class HashMap {
 	}
 
 	set(key, value) {
-		let key_hash = this.hash(key);
+		let key_hash = this.#hash(key);
 		let bucket = this.buckets[key_hash];
 
 		bucket.push({ key, value });
@@ -32,7 +32,7 @@ export default class HashMap {
 	}
 
 	get(key) {
-		let key_hash = this.hash(key);
+		let key_hash = this.#hash(key);
 		let bucket = this.buckets[key_hash];
 
 		for (const entry of bucket) {
@@ -44,4 +44,6 @@ export default class HashMap {
 
 		console.log(`No value found for key ${key}`);
 	}
+
+	
 }
