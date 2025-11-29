@@ -49,6 +49,18 @@ export default class HashMap {
 		console.log(`No value found for key ${key}`);
 	}
 
+	has(key) {
+		let key_hash = this.#hash(key);
+		let bucket = this.buckets[key_hash];
+
+		for(const entry of bucket) {
+			if(entry.key == key) {
+				return true
+			}
+		}
+		return false;
+	}
+
 	#increaseCapacity() {
 		const oldBuckets = this.buckets;
 		this.capacity *= 2;

@@ -15,4 +15,4 @@ testMap.set("jacket", "blue");
 testMap.set("kite", "pink");
 testMap.set("lion", "golden");
 
-testMap.get("kite");
+console.log(testMap.has("kite"));
