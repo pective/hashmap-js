@@ -25,6 +25,8 @@ export default class HashMap {
 		let key_hash = this.#hash(key);
 		let bucket = this.buckets[key_hash];
 
+		if(this.has(key)) this.remove(key);
+
 		if (this.length / this.capacity > this.load_factor)
 			this.#increaseCapacity();
 
@@ -42,7 +44,7 @@ export default class HashMap {
 
 		for (const entry of bucket) {
 			if (entry.key == key) {
-				console.log(`{ ${entry.key} : ${entry.value}}`);
+				console.log(`{ ${entry.key} : ${entry.value} }`);
 				return entry.value;
 			}
 		}
