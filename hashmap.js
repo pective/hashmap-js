@@ -25,7 +25,8 @@ export default class HashMap {
 		let key_hash = this.#hash(key);
 		let bucket = this.buckets[key_hash];
 
-		if (this.length / this.capacity > this.load_factor) this.#increaseCapacity();
+		if (this.length / this.capacity > this.load_factor)
+			this.#increaseCapacity();
 
 		bucket.push({ key, value });
 		this.length++;
@@ -53,9 +54,22 @@ export default class HashMap {
 		let key_hash = this.#hash(key);
 		let bucket = this.buckets[key_hash];
 
-		for(const entry of bucket) {
-			if(entry.key == key) {
-				return true
+		for (const entry of bucket) {
+			if (entry.key == key) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	remove(key) {
+		let key_hash = this.#hash(key);
+		let bucket = this.buckets[key_hash];
+
+		for (const entry of bucket) {
+			if (entry.key == key) {
+				bucket.splice(0, 1);
+				return true;
 			}
 		}
 		return false;
